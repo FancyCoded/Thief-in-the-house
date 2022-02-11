@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class Alarm : MonoBehaviour
 {
     [SerializeField] private UnityEvent _alarm;
-    [SerializeField] private SceneSwitcher _sceneSwitcher;
 
     private float _duration = 1000;
     private float _runningTime;
