@@ -14,6 +14,11 @@ public class ThiefMovement : MonoBehaviour
 
     private void Update()
     {
+        Move();
+    }
+
+    private void Move()
+    {
         Vector3 _horizontal = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
 
         _animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));

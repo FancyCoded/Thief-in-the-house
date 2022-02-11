@@ -17,7 +17,7 @@ public class Enter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if(collider2D.gameObject.TryGetComponent<Thief>(out Thief thief))
+        if(collider2D.gameObject.TryGetComponent(out Thief thief))
         {
             _isNear = true;
         }
@@ -25,7 +25,7 @@ public class Enter : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider2D)
     {
-        if (collider2D.gameObject.TryGetComponent<Thief>(out Thief thief))
+        if (collider2D.gameObject.TryGetComponent(out Thief thief))
         {
             _isNear = false;
         }

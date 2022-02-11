@@ -6,10 +6,12 @@ using UnityEngine.Events;
 public class Alarm : MonoBehaviour
 {
     [SerializeField] private UnityEvent _alarm;
+    [SerializeField] private SceneSwitcher _sceneSwitcher;
 
     private float _duration = 1000;
     private float _runningTime;
     private AudioSource _source;
+    private bool _isThief;
 
     private void Awake()
     {
@@ -17,16 +19,29 @@ public class Alarm : MonoBehaviour
         _source.volume = 0;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        if(collision.gameObject.TryGetComponent<Thief>(out Thief thief))
-        {
             StartCoroutine(VolumeUp());
             _alarm.Invoke();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.TryGetComponent(out Thief thief))
+        {
+             _isThief = true;
         }
     }
 
-    public IEnumerator VolumeUp()
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.TryGetComponent(out Thief thief))
+        {
+             _isThief = true;
+        }    
+    }
+
+    private IEnumerator VolumeUp()
     {
         float normalizedRunningTime;
 
