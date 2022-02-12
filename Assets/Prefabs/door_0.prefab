@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3203550520923092493}
   - component: {fileID: 3203550520923092495}
   - component: {fileID: 3203550520923092494}
+  - component: {fileID: 640888063}
   m_Layer: 0
   m_Name: door_0
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3203550520923092491}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4127, y: -1.9699, z: 0}
+  m_LocalPosition: {x: -2.4, y: -2, z: 0}
   m_LocalScale: {x: 0.8004351, y: 0.80608726, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -122,3 +123,46 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.13, y: 1.41}
   m_EdgeRadius: 0
+--- !u!114 &640888063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3203550520923092491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5252a72c6d0b304ebdbec1257817e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1732315315487816100, guid: 3ae95056eac3e3d4bafb4a86bd843211,
+          type: 3}
+        m_MethodName: EnterToIndoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _escaped:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1732315315487816100, guid: 3ae95056eac3e3d4bafb4a86bd843211,
+          type: 3}
+        m_MethodName: ExitToOutdoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _isIndoor: 0

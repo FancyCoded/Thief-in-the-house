@@ -220,6 +220,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _door: {fileID: 3203550520923092495, guid: 8fcbedbb60e655e4eaf4de915400409a, type: 3}
 --- !u!61 &2772060882297145159
 BoxCollider2D:
   m_ObjectHideFlags: 0

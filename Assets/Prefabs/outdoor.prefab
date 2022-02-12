@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2822027688351190331}
   - component: {fileID: 451001788917667512}
   - component: {fileID: 7074240966590978615}
-  - component: {fileID: 7742776268690385566}
+  - component: {fileID: 8131072619195516240}
   m_Layer: 0
   m_Name: outdoor
   m_TagString: Outdoor
@@ -246,7 +246,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7742776268690385566
+--- !u!114 &8131072619195516240
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8581988931595785051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52761b92e92f0014a9269f1223b0af61, type: 3}
+  m_Script: {fileID: 11500000, guid: ca2e96ab76831ae4b866839f56af9699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _alarm:
@@ -273,3 +273,4 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _door: {fileID: 3203550520923092495, guid: 8fcbedbb60e655e4eaf4de915400409a, type: 3}

@@ -10,7 +10,8 @@ public class Thief : MonoBehaviour
         {
             IsBreakIn = true;
         }
-        else if(collision.gameObject.TryGetComponent(out Outdoor outdoor))
+        
+        if(collision.gameObject.TryGetComponent(out Outdoor outdoor))
         {
             IsBreakIn = false;
         }
