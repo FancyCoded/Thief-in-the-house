@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioSource))]
-public class Alarm : MonoBehaviour
+public class AlarmVolumeAfterEscape : MonoBehaviour
 {
     [SerializeField] private UnityEvent _alarm;
 
@@ -14,28 +14,31 @@ public class Alarm : MonoBehaviour
     private void Awake()
     {
         _source = GetComponent<AudioSource>();
-        _source.volume = 0;
+        _source.volume = 1;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collision.gameObject.TryGetComponent(out Thief thief))
+        if(collider.gameObject.TryGetComponent(out Thief thief))
         {
-            StartCoroutine(VolumeUp());
-            _alarm.Invoke();
+            if (thief.IsBreakIn == true)
+            {
+                _alarm.Invoke();
+                StartCoroutine(VolumeDown());
+            }
         }
     }
 
-    private IEnumerator VolumeUp()
+    private IEnumerator VolumeDown()
     {
         float normalizedRunningTime;
 
-        for (float i = 0; i <= _duration; i += Time.deltaTime)
+        for (float i = 0; i <= _duration; i++)
         {
             _runningTime += Time.deltaTime;
 
             normalizedRunningTime = _runningTime / _duration;
-            _source.volume += normalizedRunningTime;
+            _source.volume -= normalizedRunningTime;
             yield return null;
         }
     }
