@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Door))]
 public class Alarm : MonoBehaviour
 {
     [SerializeField] private UnityEvent _burst;
@@ -13,13 +14,21 @@ public class Alarm : MonoBehaviour
     private float _runningTime;
     private bool _isBurst;
     private bool _isVolumeReduced;
+    private IEnumerator _volumeUp;
+    private IEnumerator _volumeDown;
 
     private void Awake()
     {
         _source = GetComponent<AudioSource>();
-        _door = gameObject.GetComponent<Door>();
+        _door = GetComponent<Door>();
         _source.volume = 0;
         _duration = 1000;
+    }
+
+    private void Start()
+    {
+        _volumeUp = VolumeUp();
+        _volumeDown = VolumeDown();
     }
 
     private void Update()
@@ -30,17 +39,17 @@ public class Alarm : MonoBehaviour
             _isBurst = true;
             _isVolumeReduced = false;
 
-            StopCoroutine("VolumeDown");
+            StopCoroutine(_volumeDown);
             _burst.Invoke();
-            StartCoroutine("VolumeUp");
+            StartCoroutine(_volumeUp);
         }
         else if (_door.IsIndoor == false && _isVolumeReduced == false && _door.IsEscaped)
         {
             _isBurst = false;
             _isVolumeReduced = true;
 
-            StopCoroutine("VolumeUp");
-            StartCoroutine("VolumeDown");
+            StopCoroutine(_volumeUp);
+            StartCoroutine(_volumeDown);
         }
     }
 
