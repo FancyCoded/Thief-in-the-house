@@ -59,7 +59,7 @@ public class Alarm : MonoBehaviour
         }
     }
 
-    public IEnumerator VolumeUp()
+    private IEnumerator VolumeUp()
     {
         float normalizedRunningTime;
         _runningTime = 0;
