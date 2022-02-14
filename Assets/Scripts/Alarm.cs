@@ -5,43 +5,51 @@ using UnityEngine.Events;
 [RequireComponent(typeof(AudioSource))]
 public class Alarm : MonoBehaviour
 {
-    [SerializeField] private UnityEvent _alarm;
+    [SerializeField] private UnityEvent _burst;
 
-    private Enter _enter;
+    private Door _door;
     private AudioSource _source;
-    private float _duration = 1000;
+    private float _duration;
     private float _runningTime;
+    private bool _isBurst;
+    private bool _isVolumeReduced;
 
     private void Awake()
     {
         _source = GetComponent<AudioSource>();
+        _door = gameObject.GetComponent<Door>();
         _source.volume = 0;
-        _enter = FindObjectOfType<Door>().GetComponent<Enter>();
+        _duration = 1000;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        if (collision.gameObject.TryGetComponent(out Thief thief))
+        if(_door.IsIndoor && _isBurst == false)
         {
-            if (_enter.IsIndoor)
-            {
-                _alarm.Invoke();
-                StartCoroutine(VolumeUp());
-            }
-            if (_enter.IsIndoor == false && thief.IsBreakIn)
-            {
-                _alarm.Invoke();
-                StartCoroutine(VolumeDown());
-            }
+            _source.Stop();
+            _isBurst = true;
+            _isVolumeReduced = false;
+
+            StopCoroutine("VolumeDown");
+            _burst.Invoke();
+            StartCoroutine("VolumeUp");
+        }
+        else if (_door.IsIndoor == false && _isVolumeReduced == false && _door.IsEscaped)
+        {
+            _isBurst = false;
+            _isVolumeReduced = true;
+
+            StopCoroutine("VolumeUp");
+            StartCoroutine("VolumeDown");
         }
     }
 
     private IEnumerator VolumeDown()
     {
         float normalizedRunningTime;
-        _source.volume = 1;
+        _runningTime = 0;
 
-        for (float i = 0; i <= _duration; i++)
+        while(_source.volume > 0)
         {
             _runningTime += Time.deltaTime;
 
@@ -51,11 +59,12 @@ public class Alarm : MonoBehaviour
         }
     }
 
-    private IEnumerator VolumeUp()
+    public IEnumerator VolumeUp()
     {
         float normalizedRunningTime;
+        _runningTime = 0;
 
-        for (float i = 0; i <= _duration; i += Time.deltaTime)
+        while (_source.volume <= 1)
         {
             _runningTime += Time.deltaTime;
 

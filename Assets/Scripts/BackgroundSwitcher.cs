@@ -23,7 +23,6 @@ public class BackgroundSwitcher : MonoBehaviour
 
         _door.transform.position = new Vector2(1.4f, -1.98f);
         _thief.transform.position = new Vector2(1, -2.08f);
-
          _outdoor = Instantiate(_outdoorTemplate, new Vector2(0, -0.42f), Quaternion.identity);
         _house = Instantiate(_houseTemplate, new Vector2(1.05f, -1.24f), Quaternion.identity);
     }
@@ -34,7 +33,7 @@ public class BackgroundSwitcher : MonoBehaviour
         Destroy(_house.gameObject);
 
         _door.transform.position = new Vector2(-2.4f, -2);
-        _thief.transform.position = new Vector2(-2.8f, -2.08f);
+        _thief.transform.position = new Vector2(-1.8f, -2.08f);
         _indoor = Instantiate(_indoorTemplate, new Vector2(0, 0.26f), Quaternion.identity);
     }
 
