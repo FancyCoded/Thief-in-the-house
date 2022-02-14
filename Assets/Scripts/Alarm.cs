@@ -25,12 +25,6 @@ public class Alarm : MonoBehaviour
         _duration = 1000;
     }
 
-    private void Start()
-    {
-        _volumeUp = VolumeUp();
-        _volumeDown = VolumeDown();
-    }
-
     private void Update()
     {
         if(_door.IsIndoor && _isBurst == false)
@@ -39,8 +33,13 @@ public class Alarm : MonoBehaviour
             _isBurst = true;
             _isVolumeReduced = false;
 
-            StopCoroutine(_volumeDown);
+            if(_volumeDown != null)
+            {
+                StopCoroutine(_volumeDown);
+            }
+
             _burst.Invoke();
+            _volumeUp = VolumeUp();
             StartCoroutine(_volumeUp);
         }
         else if (_door.IsIndoor == false && _isVolumeReduced == false && _door.IsEscaped)
@@ -49,6 +48,8 @@ public class Alarm : MonoBehaviour
             _isVolumeReduced = true;
 
             StopCoroutine(_volumeUp);
+
+            _volumeDown = VolumeDown();
             StartCoroutine(_volumeDown);
         }
     }
@@ -58,7 +59,7 @@ public class Alarm : MonoBehaviour
         float normalizedRunningTime;
         _runningTime = 0;
 
-        while(_source.volume > 0)
+        while (_source.volume > -1)
         {
             _runningTime += Time.deltaTime;
 
@@ -73,7 +74,7 @@ public class Alarm : MonoBehaviour
         float normalizedRunningTime;
         _runningTime = 0;
 
-        while (_source.volume <= 1)
+        while (_source.volume < 1)
         {
             _runningTime += Time.deltaTime;
 
