@@ -59,7 +59,7 @@ public class Alarm : MonoBehaviour
         float normalizedRunningTime;
         _runningTime = 0;
 
-        while (_source.volume > -1)
+        while (_source.volume >= 0)
         {
             _runningTime += Time.deltaTime;
 
@@ -74,7 +74,7 @@ public class Alarm : MonoBehaviour
         float normalizedRunningTime;
         _runningTime = 0;
 
-        while (_source.volume < 1)
+        while (_source.volume <= 1)
         {
             _runningTime += Time.deltaTime;
 
